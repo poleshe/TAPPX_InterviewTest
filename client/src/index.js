@@ -11,10 +11,13 @@ export default function App() {
     criteriaMode: "all"
   });
   // What to do onSubmit. We send the data to the Backend to get it inside the DB.
+  // Request returns HTTP Response. Managed in BundleController @ Backend.
   const onSubmit = data => 
-  fetch('/api/form-submit-url', {
+  fetch('http://localhost:8000/api/bundle/store', {
     method: 'POST',
-    body: data,
+    mode: 'no-cors', 
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data),
   }); 
 
   // Return the form. Form building.
@@ -24,7 +27,7 @@ export default function App() {
       <h1> Name and Bundle Form </h1>
 
       {/* First input, name. A valid name must be at least 4 chars, 
-      ,only contain letters, numbers, spaces or - or _ and at least 2 chars or letters. */}
+      ,only contain letters, numbers, spaces or - or _ and at least 2 numbers or letters. */}
       <input
         name="name"
         placeholder="Name"
@@ -33,6 +36,9 @@ export default function App() {
           minLength: {
             value: 4, // Min Length of data
             message: "This input must exceed 4 characters" // Error message
+          },pattern: {
+            value: /^[a-zA-Z0-9 \-_]*([a-zA-Z0-9]{2})[a-zA-Z0-9 \-_]*$/, // REGEX pattern used to validate data.
+            message: "This is not a valid name." // Error message
           }
         })}
       />
@@ -59,8 +65,7 @@ export default function App() {
         ref={register({
           required: "This input is required.", //error message for required
           pattern: {
-            // value: /([a-zA-Z0-9-_]*\.)*\w+$/,
-            value: /^(([a-zA-Z0-9_]){2,}(\.))+[a-zA-Z]+\w*$/, // REGEX pattern used to validate data
+            value: /^(([a-zA-Z0-9_])*(\.))+[a-zA-Z]+\w*$/, // REGEX pattern used to validate data
             message: "This is not a valid bundle name." // Error message
           }
         })}
