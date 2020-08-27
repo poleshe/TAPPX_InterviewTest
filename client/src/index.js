@@ -11,7 +11,11 @@ export default function App() {
     criteriaMode: "all"
   });
   // What to do onSubmit. We send the data to the Backend to get it inside the DB.
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => 
+  fetch('/api/form-submit-url', {
+    method: 'POST',
+    body: data,
+  }); 
 
   // Return the form. Form building.
   return (
@@ -20,15 +24,12 @@ export default function App() {
       <h1> Name and Bundle Form </h1>
 
       {/* First input, name. A valid name must be at least 4 chars, 
-      and only contain letters, numbers, spaces or - or _ */}
+      ,only contain letters, numbers, spaces or - or _ and at least 2 chars or letters. */}
       <input
         name="name"
+        placeholder="Name"
         ref={register({
           required: "This input is required.", //error message for required
-          pattern: {
-            value: /([a-zA-Z])*\.+([a-zA-Z])+\.+/, // REGEX pattern used to validate data
-            message: "This input is number only." // Error message
-          },
           minLength: {
             value: 4, // Min Length of data
             message: "This input must exceed 4 characters" // Error message
@@ -54,15 +55,13 @@ export default function App() {
       starts with a letter and all characters alphanumeric or underscore. */}
       <input
         name="bundle"
+        placeholder="Bundle"
         ref={register({
           required: "This input is required.", //error message for required
           pattern: {
-            value: /([a-zA-Z])*\.+([a-zA-Z])+\.+/, // REGEX pattern used to validate data
-            message: "This input is number only." // Error message
-          },
-          minLength: {
-            value: 11, // Min Length of data
-            message: "This input must exceed 10 characters" // Error message
+            // value: /([a-zA-Z0-9-_]*\.)*\w+$/,
+            value: /^(([a-zA-Z0-9_]){2,}(\.))+[a-zA-Z]+\w*$/, // REGEX pattern used to validate data
+            message: "This is not a valid bundle name." // Error message
           }
         })}
       />
@@ -80,11 +79,13 @@ export default function App() {
             : null;
         }}
       />
+
       {/* Submit button */}
       <input type="submit" value="Submit Bundle" /> 
     </form>
   );
 }
+
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
