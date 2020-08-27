@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use App\Bundle;
 use Illuminate\Http\Request;
+use DB;
+use Carbon\Carbon;
+
 
 class BundleController extends Controller
 {
@@ -12,8 +15,9 @@ class BundleController extends Controller
         $data = json_decode($request->getContent(), true);
         // Send the name and bundle to the validation function
         $validation_check = $this->validateData($data['name'], $data['bundle']);
-
+        // If it's ok, save into the database and return 200. If not, return 503.
         if($validation_check == True){
+            $this->insertNewBundle($data['name'], $data['bundle']);
             return 200;
         } else {
             echo "Error while Validating input data";
@@ -43,6 +47,23 @@ class BundleController extends Controller
 
         return True;
 
+    }
+
+    // General function to insert data inside the Bundle table, from the Bundle Controller. 
+    // Made as a function for scaling and code cleanliness.
+    // Parameters: STRING name, STRING bundle
+    // 
+    // Returns: Raises an exception if there's an error. Otherwise returns null.
+    public function insertNewBundle(String $name, String $bundlename)
+    {
+        $bundle = new Bundle;
+        $bundle->name=$name;
+        $bundle->bundle=$bundlename;
+        $bundle->created_at=Carbon::now();
+        $bundle->updated_at=Carbon::now();
+        if(!$bundle->save()){
+            App::abort(500, 'Error while saving into DB.');
+        }
     }
 
 
