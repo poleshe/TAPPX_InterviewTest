@@ -41,7 +41,7 @@ class BundleController extends Controller
             return False;
         }
         // Now the bundle.
-        $pattern = '/^(([a-zA-Z0-9_])*(\.))+[a-zA-Z]+\w*$/'; // Bundle regex. It must have at least two segments, each segments starts with a letter and all characters alphanumeric or underscore.
+        $pattern = '/^(([a-z0-9_])*(\.))+[a-z]+[a-z0-9]*$/'; // Bundle regex. It must have at least two segments, each segments starts with a letter and all characters alphanumeric or underscore.
         if(preg_match($pattern, $bundle) != 1){ // If preg_match finds a match, it returns1, if not, 0.
             echo("False");
             return False;

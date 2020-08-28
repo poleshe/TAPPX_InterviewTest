@@ -7,24 +7,34 @@ import "./styles.css";
 
 // This form is made using react-hook-form package (https://react-hook-form.com/)
 export default function App() {
-  const { register, errors, handleSubmit } = useForm({
+  const { register, errors, handleSubmit, reset } = useForm({
     criteriaMode: "all"
   });
   // What to do onSubmit. We send the data to the Backend to get it inside the DB.
   // Request returns HTTP Response. Managed in BundleController @ Backend.
-  const onSubmit = data => 
-  fetch('http://localhost:8000/api/bundle/store', {
-    method: 'POST',
-    mode: 'no-cors', 
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(data),
-  }); 
+  const onSubmit = data => {
+        fetch('http://localhost:8000/api/bundle/store', {
+            method: 'POST',
+            mode: 'no-cors', 
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data),
+        }); 
+        // Show a successfully sent message
+        document.getElementById("successfully").style.display = "block";
+        // Reset the form inputs. This function comes from react-hook-form api https://react-hook-form.com/api#reset
+        reset();
+        // Hide the successful message for 5 seconds then hide it again.
+        setTimeout(function(){
+            document.getElementById("successfully").style.display = "none";
+        }, 5000);
+    }
+
 
   // Return the form. Form building.
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* Title */}
-      <h1> Name and Bundle Form </h1>
+      <h1 id="title"> Name and Bundle Form </h1>
 
       {/* First input, name. A valid name must be at least 4 chars, 
       ,only contain letters, numbers, spaces or - or _ and at least 2 numbers or letters. */}
@@ -65,7 +75,7 @@ export default function App() {
         ref={register({
           required: "This input is required.", //error message for required
           pattern: {
-            value: /^(([a-zA-Z0-9_])*(\.))+[a-zA-Z]+\w*$/, // REGEX pattern used to validate data
+            value: /^(([a-z0-9_])*(\.))+[a-z]+[a-z0-9]*$/, // REGEX pattern used to validate data
             message: "This is not a valid bundle name." // Error message
           }
         })}
@@ -86,6 +96,7 @@ export default function App() {
       />
 
       {/* Submit button */}
+      <p id="successfully"> Form submitted successfully! </p>
       <input type="submit" value="Submit Bundle" /> 
     </form>
   );

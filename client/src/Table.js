@@ -4,11 +4,11 @@ import axios from 'axios'
 export default function Table() {
     // Declare the petition for data from the server using the "axios" package for easier promises.
     const [bundles, setBundle] = useState([])
-    // Declaring the const for getting data
+    // Declaring the const for getting data to the getBundles API function. This is found @ BundleController on Backend.
     const getData = async () => {
         let url = 'http://localhost:8000/api/bundle/getBundles';
         const response = await axios.get(url);
-        console.log('response', response);
+        console.log('Backend Response: ', response); // For debugging purposes, easier reading.
         setBundle(response.data);
     }
     // Execute get the data.
@@ -44,18 +44,20 @@ export default function Table() {
         })
     }
 
-    // Return the table. Table building.
+    // Return the built table to the page. Table building.
     return (
-        <div class="bundlesdiv">
+        <div className="bundlesdiv">
             <h1 id='title'>Bundles Table</h1>
-            <table id='bundles'>
-                <thead>
-                    <tr>{renderHeader()}</tr>
-                </thead>
-                <tbody>
-                    {renderBody()}
-                </tbody>
-            </table>
+            <div className="tablecontainer">
+                <table id='bundles' className='striped centered'>
+                    <thead>
+                        <tr>{renderHeader()}</tr>
+                    </thead>
+                    <tbody>
+                        {renderBody()}
+                    </tbody>
+                </table>
+            </div>
         </div>
         )
     }
