@@ -4,7 +4,9 @@
 The project has been done under Laravel(PHP), Mysql, React & Nginx as the proxy / server. All the project and services are under Dockers, using docker-compose.
 
 The packages used from react are "react-hook-form" for easier form controlling. [https://react-hook-form.com/](https://react-hook-form.com/)
-Also, the axiox package for easier promises has been used. [https://www.npmjs.com/package/axios](https://www.npmjs.com/package/axios)
+Also, the axios package for easier promises has been used. [https://www.npmjs.com/package/axios](https://www.npmjs.com/package/axios)
+
+Materialize CSS framework has been used for some items. https://materializecss.com/
 
 Thanks a lot for your time, and for the opportunity! Do not hesitate to contact me if you have any question. Have a great day!
 
