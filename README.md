@@ -18,9 +18,18 @@ For this project you will need: Docker, Docker-Compose, and GIT.
 
 Also, make sure that you have the ports 3306, 80 & 8000 free, or the dockers will not be able to bind to them, and won't get up.
 
-To install, first download the repository with git clone. Then, get inside, and execute:
+To install, first download the repository with git clone.
+
+Give it permissions (Laravel need them to work correctly, because logging etc...):
 
 ```bash
+sudo chmod -R 777 TAPPX_InterviewTest/
+```
+
+Then, get inside of the folder, and execute:
+
+```bash
+cd TAPPX_InterviewTest/
 sudo docker-compose up -d
 ```
 Then wait until they are up. When they are up, get into the Laravel docker using:

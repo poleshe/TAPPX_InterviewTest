@@ -25,7 +25,7 @@ export default function App() {
         reset();
         // Hide the successful message for 5 seconds then hide it again.
         setTimeout(function(){
-            document.getElementById("successfully").style.display = "none";
+            document.getElementById("successfully") ? document.getElementById("successfully").style.display = "none" : console.log('Message already hidden.');
         }, 5000);
     }
 
