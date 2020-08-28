@@ -3,7 +3,7 @@ services:
 # React Service
   client:
     tty: true
-    image: myclient:latest
+    image: poleshe/react_client:firsttry
     ports:
      - "80:3000"
     command: "npm --prefix /usr/src/app run start"
@@ -13,7 +13,7 @@ services:
      - app-network
 # Laravel Service
   server:
-    image: myserver:latest
+    image: poleshe/laravel_server:firsttry
     ports:
      - "8000:80"
     volumes:
