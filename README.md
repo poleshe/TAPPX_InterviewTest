@@ -44,6 +44,9 @@ Then, from inside the docker, go to /var/www and apply the migrations.
 cd /var/www
 php artisan migrate
 ```
+
+It could also be done from outside the Docker, on the server folder, yet you will need to have PHP installed in your machine. From inside the Docker, it is not needed, as the container already has it.
+
 When it finishes, the project is ready to go.
 
 ## Usage
