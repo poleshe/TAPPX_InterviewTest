@@ -24,11 +24,11 @@ body {
     margin: 0 auto;
   }
   
-  p {
+  form > p {
     color: #bf1650;
   }
   
-  p::before {
+  form > p::before {
     display: inline;
     content: "⚠ ";
   }
@@ -131,3 +131,43 @@ input[type="submit"] {
     border-radius: 4px;
   }
   
+  .active {
+    background-color: #0099FF;
+  }
+ 
+  ul.header li {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    text-align: center;
+  }
+  ul.header {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  ul.header li a {
+    color: #FFF;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 20px;
+    display: inline-block;
+  }
+
+  .bundlesdiv{
+    border-radius: 5px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  table{
+    background-color: white;
+    margin: 0 auto;
+    border-radius: 5px;
+  }
+
+  td {
+    border: 1px solid black;
+  }
+

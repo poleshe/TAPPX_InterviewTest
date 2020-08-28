@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
 
+// Cors allowing as this is only a dev server
+header("Access-Control-Allow-Origin: *");
 
 class BundleController extends Controller
 {
@@ -64,6 +66,18 @@ class BundleController extends Controller
         if(!$bundle->save()){
             App::abort(500, 'Error while saving into DB.');
         }
+    }
+
+    // Get all data from the Bundle Table and send as an array.
+    // Parameters: None.
+    //
+    // Returns: Json with all Bundle Table Data.
+
+    public function getBundleData()
+    {
+        $bundle = Bundle::all();
+        $bundle = $bundle->toJson();
+        return $bundle;
     }
 
 
