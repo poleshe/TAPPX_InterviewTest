@@ -35,7 +35,7 @@ sudo docker-compose up -d
 Then wait until they are up. When they are up, get into the Laravel docker using:
 
 ```bash
-sudo docker exec -it tappxinterviewtest_server_1 sh
+sudo docker exec -it tappx_interviewtest_server_1 sh
 ```
 (WARNING! The name may vary between O.S. Check the docker name using 'sudo docker ps -a'. If it's not the same, it will be very very similar. Also note we use SH and not BASH, this is because alpine versions do not use bash).
 
